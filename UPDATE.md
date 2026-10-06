@@ -24,28 +24,32 @@ attend if available.
 Establish a shared understanding of a product MVP and subsequent database design for a relational SQL.
 ---
 
-**User Story 1:**
-**As a** college student on a tight budget,
-**I want** to input, view, and edit all of my expenditures in one place
-**so that** I will know whether I have overspent in a particular category of my budget.
+**User Story 1:** <br>
 
-**Scenario 1: Adding an a recent purchase/payment to a table of expenses**
-**Given** I am on the landing page with a table of expenses,
-**When** I click the "add expense" button,
-**Then** A "new expense" modal opens up
-**and** I am able to input the expense information and see the table update when I click "save"
+**As a** college student on a tight budget, <br>
+**I want** to input, view, and edit all of my expenditures in one place <br>
+**so that** I will know whether I have overspent in a particular category of my budget. <br>
 
-**Scenario 2: Editing a purchase/payment**
-**Given** I am on the landing page with a table of expenses,
-**When** I click the "edit expense" button,
-**Then** A modal opens up with the details of that expense
-**and** I am able to change the expense information and see the table update when I click "save"
+**Scenario 1: Adding an a recent purchase/payment to a table of expenses** <br>
 
-**Scenario 3: Sorting/Filtering the Expense Table**
-**Given** I am on the landing page with a table of expenses,
-**When** I select one of the "Sort by..." or "Filter by..." options,
-**Then** The data in the table realigns accordingly
-**and** no data gets mixed up in the process 
+**Given** I am on the landing page with a table of expenses, <br>
+**When** I click the "add expense" button, <br>
+**Then** A "new expense" modal opens up <br>
+**and** I am able to input the expense information and see the table update when I click "save" <br>
+
+**Scenario 2: Editing a purchase/payment** <br>
+
+**Given** I am on the landing page with a table of expenses, <br>
+**When** I click the "edit expense" button, <br>
+**Then** A modal opens up with the details of that expense <br>
+**and** I am able to change the expense information and see the table update when I click "save" <br>
+
+**Scenario 3: Sorting/Filtering the Expense Table** <br>
+
+**Given** I am on the landing page with a table of expenses, <br>
+**When** I select one of the "Sort by..." or "Filter by..." options, <br>
+**Then** The data in the table realigns accordingly <br>
+**and** no data gets mixed up in the process <br>
 
 **Demonstration Summary:**
 The team demonstrated progress by walking through:

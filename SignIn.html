@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" href="SignIn.css">
+</head>
+
+<body>
+    <div class="page-layout">
+        <div class="right-panel">
+            <div class="signup-container">
+                <h3>Welcome back to Penny</h3>
+                <h1>Take control of your finances.</h1>
+
+                <p class="signup-description">
+                    Sign in to continue managing your money and financial goals.
+                </p>
+
+                <form method="POST" action="{{ url_for('login_pages.login') }}">
+
+                    <div class="form-group">
+                        <label for="login_input">Username or Email</label>
+                        <input type="text" id="login_input" name="login_input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password_input">Password</label>
+                        <input type="password" id="password_input" name="password_input">
+                    </div>
+
+                    <button type="submit" class="signup-button">Sign In</button>
+
+                </form>
+
+                <p class="signin-text">Don't have an account?
+                    <a href="#">Sign up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

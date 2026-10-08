@@ -62,9 +62,9 @@ The team demonstrated progress by walking through:
 ---
 
 ## Action Items to Work on for Next Sprint
-- Claudia will work on the UI.
-- Layce will work on the UX design.
-- Miles will put together a README.
+- Claudia will work on the UI of the product MVP.
+- Layce will work on the UX design of the product MVP.
+- Miles will put together a README for the product MVP.
 - All group members will work on the database design.
 
 **Notes:**

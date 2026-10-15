@@ -88,8 +88,8 @@ The team agreed that Trello is a good way to keep track of tasks and agreed to k
 
 ## Individual Contributions This Week
 
-- **Claudia Vargas:** drafted .css files for setup/login pages
-- **Layce Smith:** wrote WEEKLY_STATUS.md for project milestone 3
-- **Miles Devine:** drafted .sql file for database design
+- **Claudia Vargas:** setup Trello project board, drafted .css files for setup/login pages
+- **Layce Smith:** drafted initial user stories, wrote WEEKLY_STATUS.md for project milestone 3
+- **Miles Devine:** defined MVP feature scope, drafted .sql file for database design
 
 

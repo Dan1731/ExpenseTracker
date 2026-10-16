@@ -1,0 +1,298 @@
+
+/* GENERAL PAGE */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f6f7f4;
+    color: #28352f;
+}
+
+/* SPLIT SCREEN */
+
+.page-layout {
+    min-height: 100vh;
+    display: flex;
+}
+
+/* LEFT BRANDING PANEL */
+
+.left-panel {
+    width: 65%;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 65px 75px;
+
+    background: #28352f;
+    color: #ffffff;
+}
+
+.brand-name {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 650;
+    letter-spacing: -0.5px;
+}
+
+.brand-content h1 {
+    max-width: 600px;
+    margin-bottom: 20px;
+
+    font-size: clamp(36px, 4vw, 62px);
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    line-height: 1.12;
+}
+
+.brand-content p {
+    max-width: 490px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #c5d4ca;
+}
+
+.brand-footer {
+    font-size: 12px;
+    color: #a5b7aa;
+}
+
+/* RIGHT SIGN-UP PANEL */
+
+.right-panel {
+    width: 35%;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+    background: #f6f7f4;
+}
+
+/* SIGN-UP CONTAINER */
+
+.signup-container {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+
+    padding: 40px;
+
+    background: #ffffff;
+    border: 1px solid #dce7df;
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(40, 53, 47, 0.05);
+}
+
+/* HEADINGS */
+
+.signup-container h3 {
+    text-align: center;
+    color: #638a7a;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.signup-container h1 {
+    text-align: center;
+    color: #28352f;
+
+    font-size: 28px;
+    font-weight: 600;
+
+    margin-top: 0;
+    margin-bottom: 32px;
+}
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #38483f;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    height: 46px;
+    box-sizing: border-box;
+
+    padding: 0 14px;
+
+    background: #ffffff;
+    color: #28352f;
+
+    border: 1px solid #cbd7ce;
+    border-radius: 8px;
+
+    outline: none;
+    font-size: 13px;
+}
+
+.form-group input::placeholder {
+    color: #929f96;
+}
+
+.form-group input:focus {
+    border-color: #638a7a;
+    box-shadow: 0 0 0 3px rgba(99, 138, 122, 0.14);
+}
+
+/* BUTTONS */
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+
+    margin-top: 26px;
+}
+
+.button-group button {
+    height: 46px;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* SIGN UP BUTTON */
+
+.signup-button {
+    width: 100%;
+    background: #28352f;
+    color: #ffffff;
+
+    transition: background 0.2s ease;
+}
+
+.signup-button:hover {
+    background: #40594c;
+}
+
+/* ALREADY HAVE AN ACCOUNT */
+
+.signin-text {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12px;
+    color: #65736a;
+}
+
+.signin-text a {
+    margin-left: 4px;
+    color: #638a7a;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signin-text a:hover {
+    text-decoration: underline;
+}
+
+/* TERMS */
+
+.terms-text {
+    text-align: center;
+    margin-top: 12px;
+
+    font-size: 10px;
+    line-height: 1.5;
+    color: #89968c;
+}
+
+.terms-text a {
+    color: #638a7a;
+    text-decoration: none;
+}
+
+.terms-text a:hover {
+    text-decoration: underline;
+}
+
+/* VALIDATION */
+
+.error-message {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #c23636;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .left-panel {
+        width: 55%;
+        padding: 45px;
+    }
+
+    .right-panel {
+        width: 45%;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 700px) {
+    .page-layout {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        width: 100%;
+        min-height: auto;
+        padding: 30px 25px;
+        gap: 20px;
+    }
+
+    .brand-content h1 {
+        font-size: 30px;
+        margin: 0 0 10px;
+    }
+
+    .brand-content p {
+        font-size: 13px;
+        margin: 0;
+    }
+
+    .brand-footer {
+        display: none;
+    }
+
+    .right-panel {
+        width: 100%;
+        min-height: auto;
+        padding: 30px 20px;
+    }
+
+    .signup-container {
+        padding: 30px 25px;
+    }
+}

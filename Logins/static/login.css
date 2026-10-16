@@ -73,8 +73,16 @@ body {
 }
 .content p { max-width: 100%; color: #c5d4ca; font-size: 16px; line-height: 1.8; }
 .footer { font-size: 12px; color: #a5b7aa; }
+
+.switch-text {
+    margin-top: 60px;
+    margin-bottom: 8px;
+    color: #c5d4ca;
+    text-align: center;
+}
+
 .switch-button {
-    margin-top: 25px;
+    margin-top: 8px;
     padding: 12px 45px;
     border: 1px solid #fff;
     border-radius: 18px;
@@ -239,14 +247,12 @@ body {
 
 /* Links and text. */
 .forgot-password-text { margin: 0; font-size: 12px; }
-.signup-text, .signin-text { margin: 22px 0 0; color: #65736a; font-size: 12px; text-align: center; }
-.signup-text a, .signin-text a { margin-left: 4px; }
-.forgot-password-text a, .signup-text a, .signin-text a, .terms-text a {
+.forgot-password-text a, .signin-text a, .terms-text a {
     color: #638a7a;
     font-weight: 600;
     text-decoration: none;
 }
-.forgot-password-text a:hover, .signup-text a:hover,
+.forgot-password-text a:hover,
 .signin-text a:hover, .terms-text a:hover { text-decoration: underline; }
 .terms-text { margin: 12px 0 0; color: #89968c; font-size: 10px; line-height: 1.5; text-align: center; }
 
@@ -265,7 +271,6 @@ body {
     .signin-container h1, .signup-container h1 { margin-bottom: 16px; }
     .signin-container .button-group { margin-top: 30px; }
     .signup-container .button-group { margin-top: 12px; }
-    .signup-text, .signin-text { margin-top: 14px; }
 }
 
 /* Mobile adjustments. */

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from init_extension import db
 from flask import Flask
 import models
@@ -11,12 +12,14 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+@app.route('/')
+def home();
+    return "Flask is running successfully!"
+
 @app.route('/add_expense', methods=['GET', 'POST'])
 def add_expense():
-    
+    pass
 
-
-
-
-
+if __name__ == '__main__':
+    app.run(debug=True) 
 

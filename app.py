@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from init_extension import db
 from flask import Flask
 import models

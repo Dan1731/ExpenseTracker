@@ -79,7 +79,26 @@ A table that has all the recorded expenses a user inputs. This table includes th
 - Verify that highlighting an expense for editing or deleting is rendered correctly.
 
 ### Mockup
-
++----------------------+-------------------------------------------------------------+
+| Penny           | Expenses                                                  |
+|                 |                                                           |
+| [Dashboard]     | [Add]   Category: [Filter]   Date: [Filter]               |
+| [Expenses]      | [Edit]                                                    |
+| [Profile]       | +-------------------------------------------------------+ |
+|                 | |Select | Date     | Description | Category      | Amount | 
+|                 | +-------------------------------------------------------+ |
+|                 | | [x]   |10/03/26 | Groceries   | Food           | $84.32 |        
+|                 | | [x]   |10/05/26 | Gas         | Transportation | $42.10 |       
+|                 | | [x]   |10/08/26 | Spotify     | Entertainment  | $11.99 |        
+|                 | | [x]   |10/12/26 | Coffee      | Food           |  $6.25 |        
+|                 | +-------------------------------------------------------+ |
+|                 |                                                           |
+|                 |                                   Total Expenses: $144.66 |
+|                 |                                                           |
+|                 |  [Plus button task bar option]                            |
+|                 |                                                           |
+| [Sign Out]      |                                   [Previous]  1  [Next]   |
++-----------------+-------------------------------------------------------------+
 
 ---
 # Page Title #3:
@@ -116,7 +135,29 @@ Includes reports of the user's recorded expenses. This might include graphs such
 - Verify that charts and summaries are rendered correctly.
 
 ### Mockup
-
++----------------------+----------------------------------------------------+
+| Penny           | Dashboard                                               |
+|                 |                                                         |
+| [Dashboard]     | Category: [Filter]   Date: [Filter]                     |
+| [Expenses]      |                                                         |
+| [Profile]       | +-------------------+   +-------------------+           |
+|                 | | Box 1             |   | Box 2             |           |
+|                 | |                   |   |                   |           |
+|                 | |    graph here     |   |    graph here     |           |
+|                 | |                   |   |                   |           |
+|                 | | Filter: []        |   | Filter: []        |           |
+|                 | +-------------------+   +-------------------+           |
+|                 |                                                         |
+|                 | +-------------------+   +-------------------+           |
+|                 | | Box 3             |   | Box 4             |           |
+|                 | |                   |   |                   |           |
+|                 | |    graph here     |   |    graph here     |           |
+|                 | |                   |   |                   |           |
+|                 | | Filter: []        |   | Filter: []        |           |
+|                 | +-------------------+   +-------------------+           |
+|                 |                                                         |
+| [Sign Out]      |                                                         |
++-----------------+---------------------------------------------------------+
 
 ---
 # Page Title #4:
@@ -158,7 +199,37 @@ A small pop-up form that allows the user to manually add a new expense or add a 
 - Verify that a new category appears as an option after it is added.
 
 ### Mockup
++----------------------+-------------------------------------------------------------+
+| Penny                |        Add Expense         |        Add Category            |
+|                      |  ---------------------------------------------------------  |                                                    
+| [Dashboard]          |   Expense Name        [ New Expense____________________]    |
+| [Expenses]           |   Description         [ ______________________________ ]    |
+| [Profile]            |   Expense Amount      [ ______________________________ ]    |
+|                      |   Expense Date        [ __ / __ / ____ ]                    |
+|                      |   Category            [ Select Category ]                   |
+|                      |                                                             |
+|                      |                                                             |
+|                      |   [ ] Add another                  [Cancel]   [Save]        |
+|                      |                                                             |
+|                      |                                                             |
+| [Sign Out]           |                                                             |
++----------------------+-------------------------------------------------------------+
 
++----------------------+-------------------------------------------------------------+
+| Penny                |        Add Expense         |        Add Category            |
+|                      |  ---------------------------------------------------------  |                                                    
+| [Dashboard]          |                                                             |
+| [Expenses]           |   New Category            [ Manually input  ]               |
+| [Profile]            |                                                             |
+|                      |                                                             |
+|                      |                                                             |
+|                      |                                                             |
+|                      |                                                             |
+|                      |   [ ] Add another                  [Cancel]   [Save]        |
+|                      |                                                             |
+|                      |                                                             |
+| [Sign Out]           |                                                             |
++----------------------+-------------------------------------------------------------+
 
 ---
 # Page Title #5:
@@ -195,6 +266,24 @@ Allows the user to view and update their account information.
 - Verify that a confirmation message appears after the user's information is updated.
 
 ### Mockup
++----------------------+-------------------------------------------------------------+
+| Penny           | Profile                                                   |
+|                 |                                                           |
+| [Dashboard]     | User Information                                          |
+| [Expenses]      | Username:                                                 |
+| [Profile]       | [_Username ________________]                              |
+|                 |                                                           | 
+|                 | Email:                                                    |
+|                 | [Email Email_______________]                              |
+|                 |                                                           |
+|                 | Password
+|                 | [Confirm Password _________]                              |
+|                 | [Change Password]                                         |        
+|                 | [Confirm Changed Password _]                              |     
+|                 |                                                           |
+|                 |                                                           |
+|                 |                                                           |
+|                 |                                                           |
+| [Sign Out]      |                              [Cancel]    [Save Changes]   |
++-----------------+-----------------------------------------------------------+
 
-### Mockup
-_Add screenshot or mockup here._

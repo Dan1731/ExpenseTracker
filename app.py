@@ -18,7 +18,7 @@ with app.app_context():
     db.create_all()
 
 @app.route('/')
-def home();
+def home():
     return "Flask is running successfully!"
 
 @app.route('/add_expense', methods=['GET', 'POST'])

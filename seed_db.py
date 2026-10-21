@@ -19,6 +19,8 @@ with app.app_context():
     for _ in range(50):
         user = User(
            username = fake.unique.user_name(),
+           first_name = fake.first_name(),
+           last_name = fake.last_name(),
            email = fake.unique.email(),
            password_hash = fake.password()
         )
@@ -27,7 +29,7 @@ with app.app_context():
 
     user_ids = db.session.execute(db.select(User.id)).scalars().all()
     
-    categories = ["Housing", "Groceries", "Eating Out", "Gas", "Utilities", "Healthcare", "Insurance"]
+    categories = ["Housing", "Transportation", "Food", "Tuition / Books", "Utilities", "Subscriptions", "Insurance", "Phone"]
 
     for cat in categories:
         cat_entry = ExpenseCat(

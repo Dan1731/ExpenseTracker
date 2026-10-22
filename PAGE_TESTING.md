@@ -79,26 +79,9 @@ A table that has all the recorded expenses a user inputs. This table includes th
 - Verify that highlighting an expense for editing or deleting is rendered correctly.
 
 ### Mockup
-+----------------------+-------------------------------------------------------------+
-| Penny           | Expenses                                                  |
-|                 |                                                           |
-| [Dashboard]     | [Add]   Category: [Filter]   Date: [Filter]               |
-| [Expenses]      | [Edit]                                                    |
-| [Profile]       | +-------------------------------------------------------+ |
-|                 | |Select | Date     | Description | Category      | Amount | 
-|                 | +-------------------------------------------------------+ |
-|                 | | [x]   |10/03/26 | Groceries   | Food           | $84.32 |        
-|                 | | [x]   |10/05/26 | Gas         | Transportation | $42.10 |       
-|                 | | [x]   |10/08/26 | Spotify     | Entertainment  | $11.99 |        
-|                 | | [x]   |10/12/26 | Coffee      | Food           |  $6.25 |        
-|                 | +-------------------------------------------------------+ |
-|                 |                                                           |
-|                 |                                   Total Expenses: $144.66 |
-|                 |                                                           |
-|                 |  [Plus button task bar option]                            |
-|                 |                                                           |
-| [Sign Out]      |                                   [Previous]  1  [Next]   |
-+-----------------+-------------------------------------------------------------+
+<img width="604" height="420" alt="image" src="https://github.com/user-attachments/assets/6a022cbf-b142-498a-a669-c447a4414c42" />
+<img width="1901" height="867" alt="image" src="https://github.com/user-attachments/assets/f76d50d8-6eff-462a-a5e0-64b78fa0f536" />
+
 
 ---
 # Page Title #3:
@@ -135,29 +118,7 @@ Includes reports of the user's recorded expenses. This might include graphs such
 - Verify that charts and summaries are rendered correctly.
 
 ### Mockup
-+----------------------+----------------------------------------------------+
-| Penny           | Dashboard                                               |
-|                 |                                                         |
-| [Dashboard]     | Category: [Filter]   Date: [Filter]                     |
-| [Expenses]      |                                                         |
-| [Profile]       | +-------------------+   +-------------------+           |
-|                 | | Box 1             |   | Box 2             |           |
-|                 | |                   |   |                   |           |
-|                 | |    graph here     |   |    graph here     |           |
-|                 | |                   |   |                   |           |
-|                 | | Filter: []        |   | Filter: []        |           |
-|                 | +-------------------+   +-------------------+           |
-|                 |                                                         |
-|                 | +-------------------+   +-------------------+           |
-|                 | | Box 3             |   | Box 4             |           |
-|                 | |                   |   |                   |           |
-|                 | |    graph here     |   |    graph here     |           |
-|                 | |                   |   |                   |           |
-|                 | | Filter: []        |   | Filter: []        |           |
-|                 | +-------------------+   +-------------------+           |
-|                 |                                                         |
-| [Sign Out]      |                                                         |
-+-----------------+---------------------------------------------------------+
+<img width="534" height="463" alt="image" src="https://github.com/user-attachments/assets/2d7a3a96-0f31-42bd-afe0-befd596d7c83" />
 
 ---
 # Page Title #4:
@@ -199,37 +160,7 @@ A small pop-up form that allows the user to manually add a new expense or add a 
 - Verify that a new category appears as an option after it is added.
 
 ### Mockup
-+----------------------+-------------------------------------------------------------+
-| Penny                |        Add Expense         |        Add Category            |
-|                      |  ---------------------------------------------------------  |                                                    
-| [Dashboard]          |   Expense Name        [ New Expense____________________]    |
-| [Expenses]           |   Description         [ ______________________________ ]    |
-| [Profile]            |   Expense Amount      [ ______________________________ ]    |
-|                      |   Expense Date        [ __ / __ / ____ ]                    |
-|                      |   Category            [ Select Category ]                   |
-|                      |                                                             |
-|                      |                                                             |
-|                      |   [ ] Add another                  [Cancel]   [Save]        |
-|                      |                                                             |
-|                      |                                                             |
-| [Sign Out]           |                                                             |
-+----------------------+-------------------------------------------------------------+
-
-+----------------------+-------------------------------------------------------------+
-| Penny                |        Add Expense         |        Add Category            |
-|                      |  ---------------------------------------------------------  |                                                    
-| [Dashboard]          |                                                             |
-| [Expenses]           |   New Category            [ Manually input  ]               |
-| [Profile]            |                                                             |
-|                      |                                                             |
-|                      |                                                             |
-|                      |                                                             |
-|                      |                                                             |
-|                      |   [ ] Add another                  [Cancel]   [Save]        |
-|                      |                                                             |
-|                      |                                                             |
-| [Sign Out]           |                                                             |
-+----------------------+-------------------------------------------------------------+
+<img width="585" height="629" alt="image" src="https://github.com/user-attachments/assets/24939715-1868-44d6-b43e-54ee3e5dd56d" />
 
 ---
 # Page Title #5:
@@ -266,24 +197,8 @@ Allows the user to view and update their account information.
 - Verify that a confirmation message appears after the user's information is updated.
 
 ### Mockup
-+----------------------+-------------------------------------------------------------+
-| Penny           | Profile                                                   |
-|                 |                                                           |
-| [Dashboard]     | User Information                                          |
-| [Expenses]      | Username:                                                 |
-| [Profile]       | [_Username ________________]                              |
-|                 |                                                           | 
-|                 | Email:                                                    |
-|                 | [Email Email_______________]                              |
-|                 |                                                           |
-|                 | Password
-|                 | [Confirm Password _________]                              |
-|                 | [Change Password]                                         |        
-|                 | [Confirm Changed Password _]                              |     
-|                 |                                                           |
-|                 |                                                           |
-|                 |                                                           |
-|                 |                                                           |
-| [Sign Out]      |                              [Cancel]    [Save Changes]   |
-+-----------------+-----------------------------------------------------------+
+<img width="538" height="401" alt="image" src="https://github.com/user-attachments/assets/b48a1c9c-8c2b-42ce-bee3-54aebdc541d6" />
+
+<img width="1684" height="821" alt="image" src="https://github.com/user-attachments/assets/375fcd02-d4fd-48d8-b60c-992e19061684" />
+
 

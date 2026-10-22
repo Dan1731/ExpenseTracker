@@ -20,7 +20,6 @@ app.register_blueprint(login_pages)
 with app.app_context():
     db.create_all()
 
-
 @app.route('/add_expense', methods=['GET', 'POST'])
 def add_expense():
     pass

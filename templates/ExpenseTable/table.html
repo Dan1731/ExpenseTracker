@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracking</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='ExpenseTable/table.css') }}">
+</head>
+
+
+<body>
+    <div class="table-container">
+        <h2>Expenses</h2>
+
+        <button type="button" class="table-button">Add</button>
+        <input type="category-select" id="category-filter" name="category" value="all" placeholder="Categories">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="dateStart-filter" placeholder="Range">
+
+        <label for="end-date">End Date:</label>
+        <input type="date" id="dateEnd-filter" placeholder="Range">
+
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all"></th>
+                    <th>Date</th>
+                    <th>Expense</th>
+                    <th>Amount($)</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <td><input type="checkbox" class="row-checkbox"></td>
+                <td></td>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total Expenses</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    
+</body>
+
+</html>

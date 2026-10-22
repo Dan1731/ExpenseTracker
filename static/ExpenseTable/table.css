@@ -1,0 +1,181 @@
+
+/* Body */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #28352f;
+    background: #f6f7f4;
+}
+
+/* Main container */
+.table-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 32px;
+    background: #fff;
+    border: 1px solid #dce7df;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(40, 53, 47, 0.05);
+}
+
+/* Heading */
+.table-container h2 {
+    margin: 0 0 24px;
+    color: #28352f;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* Buttons */
+.table-button {
+    padding: 12px 35px;
+    min-height: 42px;
+    border: 1px solid #a4bbaf;
+    border-radius: 18px;
+    background: #28352f;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.table-button:hover {
+    background: #40594c;
+}
+
+/* Filters */
+#category-filter,
+#dateStart-filter,
+#dateEnd-filter {
+    height: 42px;
+    padding: 0 14px;
+    margin: 0 12px 20px 0;
+    border: 1px solid #cbd7ce;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+    color: #28352f;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+#category-filter:focus,
+#dateStart-filter:focus,
+#dateEnd-filter:focus {
+    border-color: #638a7a;
+    box-shadow: 0 0 0 3px rgba(99, 138, 122, 0.14);
+}
+
+label {
+    margin-right: 8px;
+    color: #38483f;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Expense table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Column headings */
+thead {
+    background: #edf1ec;
+}
+
+th {
+    padding: 16px;
+    text-align: left;
+    color: #28352f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #a4bbaf;
+}
+
+/* Expense rows */
+td {
+    padding: 16px;
+    color: #38483f;
+    font-size: 13px;
+    border-bottom: 1px solid #dce7df;
+}
+
+/* Hover effect */
+tbody tr:hover {
+    background: #f6f7f4;
+}
+
+/* Checkbox column */
+th:first-child,
+td:first-child {
+    width: 45px;
+    text-align: center;
+}
+
+input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #638a7a;
+}
+
+/* Total expenses row */
+tfoot td {
+    padding: 18px 16px;
+    background: #edf1ec;
+    color: #28352f;
+    font-size: 14px;
+    font-weight: 700;
+    border-top: 2px solid #a4bbaf;
+    border-bottom: none;
+}
+
+#total-expenses {
+    font-weight: 700;
+    color: #28352f;
+}
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+    .table-container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 16px;
+        overflow-x: auto;
+    }
+
+    .table-container h2 {
+        font-size: 24px;
+    }
+
+    table {
+        min-width: 750px;
+    }
+
+    th, td {
+        padding: 12px;
+    }
+
+    #category-filter,
+    #dateStart-filter,
+    #dateEnd-filter {
+        max-width: 100%;
+  }
+}

@@ -7,12 +7,13 @@
 
     <title>Penny</title>
 
-    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Logins/login.css') }}">
 </head>
     
 <body>
 
-    <div class="page-layout" id="container">
+    <!-- If validation fails stay on sign up container. -->
+    <div class="page-layout {% if show_signup %}signup-active{% endif %}" id="container">
 
         <!-- GREEN PANEL -->
         <div class="left-panel">
@@ -77,7 +78,11 @@
                 <div class="signin-container">
                     <h1>Sign In</h1>
 
-                    <form id="loginForm">
+                    {% if success_message %}
+                        <p class="success-message">{{ success_message }}</p>
+                    {% endif %}
+
+                    <form id="loginForm" method="POST" action="{{ url_for('login_route.login') }}">
 
                         <div class="form-group">
                             <label for="login">Email or Username</label>
@@ -119,40 +124,98 @@
                     <h3>WELCOME TO PENNY</h3>
                     <h1>Create Account</h1>
 
-                    <form id="signupForm">
-
+                    <form id="signupForm" method="POST" action="{{ url_for('login_route.signup') }}">
+                        
+                        <!-- Username -->
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" id="username"
-                                   name="username"
-                                   placeholder="Choose a username"
-                                   required>
+                            <input type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Choose a username"
+                                value="{{ username or '' }}"
+                                required>
+
+                            {% if username_error %}
+                                <p class="error-message">{{ username_error }}</p>
+                            {% endif %}
                         </div>
 
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text"
+                                id="firstName"
+                                name="first_name"
+                                placeholder="First Name"
+                                value="{{ first_name or '' }}"
+                                required>
+
+                            {% if first_name_error %}
+                                <p class="error-message">{{ first_name_error }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text"
+                                id="lastName"
+                                name="last_name"
+                                placeholder="Last Name"
+                                value="{{ last_name or '' }}"
+                                required>
+
+                            {% if last_name_error %}
+                                <p class="error-message">{{ last_name_error }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email -->
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email"
-                                   name="email"
-                                   placeholder="Enter your email"
-                                   required>
+                            <input type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value="{{ email or '' }}"
+                                required>
+
+                                {% if email_error %}
+                                    <p class="error-message">{{ email_error }}</p>
+                                {% endif %}
                         </div>
 
+                        <!-- Password -->
                         <div class="form-group">
                             <label for="signupPassword">Password</label>
-                            <input type="password" id="signupPassword"
-                                   name="password"
-                                   placeholder="Create a password"
-                                   required>
+                            <input type="password"
+                                id="signupPassword"
+                                name="password"
+                                placeholder="Create a password"
+                                oninput="validatePassword()"
+                                required>
+                            <p id="password-warning" class="error-message"></p>
+
+                            {% if password_error %}
+                                <p class="error-message">{{ password_error }}</p>
+                            {% endif %}
                         </div>
 
                         <div class="form-group">
-                            <label for="confirmPassword">
-                                Confirm Password
-                            </label>
-                            <input type="password" id="confirmPassword"
-                                   name="confirm_password"
-                                   placeholder="Confirm your password"
-                                   required>
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password"
+                                id="confirmPassword"
+                                name="confirm_password"
+                                placeholder="Confirm your password"
+                                oninput="validatePassword()"
+                                required>
+
+                            {% if confirm_password_error %}
+                                <p class="error-message">
+                                    {{ confirm_password_error }}
+                                </p>
+                            {% endif %}
                         </div>
 
                         <div class="button-group">
@@ -168,8 +231,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script src="../static/login.js"></script>
+    <script src="{{ url_for('static', filename='Logins/login.js') }}"></script>
 </body>
 
 </html>

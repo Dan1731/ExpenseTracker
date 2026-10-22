@@ -245,6 +245,16 @@ body {
 .signin-button:hover, .signup-button:hover { background: #40594c; }
 .signup-button { width: 100%; }
 
+.success-message {
+    color: #276749;
+    background-color: #e6f4ea;
+    border: 1px solid #b7dfc5;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+}
+
 /* Links and text. */
 .forgot-password-text { margin: 0; font-size: 12px; }
 .forgot-password-text a, .signin-text a, .terms-text a {

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Penny - Add Expense</title>
+
+    <link rel="stylesheet" href="static/add_expense.css">
+</head>
+
+<body>
+<main class="page">
+    <a class="back" href="#"><span aria-hidden="true">&larr;</span>Back to Expense Table</a>
+    <h1>Add a New Expense</h1>
+        <div class="expense-card">
+            <form method="POST">
+
+                    <label for="expense_title">Title</label>
+                    <input type="text" id="expense_title" name="expense_title" placeholder="Give your expense a title" required>
+
+                    <label for="expense_desc">Description</label>
+                    <input type="text" id="expense_desc" name="expense_desc" placeholder="Enter a brief description" >
+
+                    <label for="expense_amount">Amount</label>
+                    <input type="number" id="expense_amount" name="expense_amount" step="0.01" min="0.01" placeholder="$0.00" required>
+
+                    <label for="expense_cat">Category</label>
+                    <select id="expense_cat" name="expense_category" required>
+                        <option value="" disabled selected hidden>Select a category</option>
+                        {% for category in categories %}
+                            <option value="{{ category['id'] }}">
+                                {{ category['name']}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <label for="expense_date">Date</label>
+                    <input type="date" id="expense_date" name="expense_date" required>
+
+                <button type="submit" class="button button-primary">Add Expense</button>
+            </form>
+        </div>
+</main>
+</body>
+</html>

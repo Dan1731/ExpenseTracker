@@ -5,10 +5,10 @@
 ##To run the app: flask --app app run
 ##To run with debugger: flask --app app run --debug
 from init_extension import db
-from flask import Flask, render_template
-from init_extension import db
+from flask import Flask, render_template, session
 from models import User, ExpenseTrans
 from login_route import login_pages
+from add_expense_route import add_expenses
 
 app = Flask(__name__)
 
@@ -16,13 +16,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///expense_tracker.db'
 
 db.init_app(app)
 app.register_blueprint(login_pages)
+app.register_blueprint(add_expenses)
 
 with app.app_context():
     db.create_all()
-
-@app.route('/add_expense', methods=['GET', 'POST'])
-def add_expense():
-    pass
 
 # User goes to expense table for now when sign in successful.
 @app.route("/expenses")

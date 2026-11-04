@@ -2,56 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Viewport meta tag for responsive design -->
 <title>Penny</title>
-<link rel="stylesheet" href="../static/profile.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}"> <!-- Styles for the profile page -->
 
 </head>
 <body>
 <main class="page">
   <a class="back" href="#"><span aria-hidden="true">&larr;</span> Back to dashboard</a>
   <p class="eyebrow">Your Penny account</p>
-  <h1>Hi, User!</h1>
+  <h1>Hi, {{ user.first_name or user.username }}!</h1> <!-- Greeting message (user's first name or username)-->
   <p class="lede">Make yourself at home. Keep your details up to date.</p>
 
-  <form method="post" action="#">
+  <form method="post" action="#" novalidate> <!-- Form for updating profile information -->
+    {% if error %}<p class="note" style="color:#b00020">{{ error }}</p>{% endif %} <!-- Error message will appear on page-->
     <section class="card" aria-labelledby="personal-heading">
       <div class="card-head">
         <h2 id="personal-heading">Personal details</h2>
-        <span class="note">Demo account</span>
       </div>
 
-      <div class="identity">
-        <div class="avatar" aria-hidden="true">{{ (user.username or '?')[:2] | upper }}</div>
-        <div class="identity-text">
-          <div class="identity-name">{{ user.username }}</div>
-          <div class="note">{% if user.created_at %}Member since {{ user.created_at }}{% endif %}</div>
-        </div>
-        <button type="button" class="btn">Change photo</button>
-      </div>
-
-      <div class="grid">
+      <div class="grid"> <!-- Grid for layout -->
         <div class="field">
-          <label class="lbl" for="first_name">First name</label>
+          <label class="lbl" for="first_name">First name</label> <!-- Label for the first name input -->
           <input type="text" id="first_name" name="first_name" value="{{ user.first_name or '' }}">
         </div>
         <div class="field">
-          <label class="lbl" for="last_name">Last name</label>
+          <label class="lbl" for="last_name">Last name</label> <!-- Label for the last name input -->
           <input type="text" id="last_name" name="last_name" value="{{ user.last_name or '' }}">
         </div>
       </div>
 
       <div class="field">
-        <label class="lbl" for="email">Email address</label>
-        <input type="email" id="email" name="email" value="{{ user.email or '' }}">
+        <label class="lbl" for="username">Username</label> <!-- Label for the username input -->
+        <input type="text" id="username" name="username" value="{{ user.username or '' }}">
       </div>
 
+      <div class="field">
+        <label class="lbl" for="email">Email address</label> <!-- Label for the email input -->
+        <input type="email" id="email" name="email" value="{{ user.email or '' }}">
+      </div>
+    </section>
 
     <div class="footer">
       <span class="footer-note">Changes apply to your Penny account.</span>
       <div class="actions">
         <a class="cancel" href="#">Cancel</a>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button> <!-- Button for submitting the form -->
       </div>
     </div>
   </form>

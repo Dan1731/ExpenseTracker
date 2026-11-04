@@ -86,6 +86,20 @@ label {
 }
 .button-primary:hover { background: #162520; }
 
+.error-message {
+    color: red;
+    font-family: inherit;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.success-message {
+    color: 38483f;
+    font-family: inherit;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
 .expense-form label {
     display: block;
     margin-bottom: 8px;

@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Viewport meta tag for responsive design -->
-<title>Penny</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}"> <!-- Styles for the profile page -->
-
-</head>
-<body>
-<main class="page">
+{% extends "navigation.html" %}
+{% block content %}
   <a class="back" href="#"><span aria-hidden="true">&larr;</span> Back to dashboard</a>
   <p class="eyebrow">Your Penny account</p>
   <h1>Hi, {{ user.first_name or user.username }}!</h1> <!-- Greeting message (user's first name or username)-->
@@ -51,6 +42,4 @@
       </div>
     </div>
   </form>
-</main>
-</body>
-</html>
+{% endblock %}

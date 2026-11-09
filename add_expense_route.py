@@ -28,19 +28,17 @@ def add_expense():
         exp_cat_id = request.form.get('expense_category')
         exp_date = request.form.get('expense_date')
 
-        print(exp_cat_id)
-
         # title validation
         if not error_message:
             if not exp_title:
                 error_message = "No title provided! Please provide one (max 50 chars)"
             elif len(exp_title) > 50:
-                error_message = "No title provided! Please provide one (max 50 chars)"
+                error_message = "Title is too long! Please try again (max 50 chars)"
 
         # description validation
         if not error_message:
             if exp_desc and len(exp_desc) > 100:
-                error_msg = "Invalid description provided. Please try again (max 100 chars)"
+                error_message = "Invalid description provided. Please try again (max 100 chars)"
 
         # amount validation
         if not error_message:
@@ -61,14 +59,15 @@ def add_expense():
                 error_message = "An expense category is required! Please select one from the list"
         
         # date validation
-        if not error_message and not exp_date:
-            error_message = "A date is required! Please enter one"
-            
-        else:
-            try:
-                expense_date_obj = datetime.fromisoformat(exp_date)
-            except ValueError:
-                error_message = "You have entered an invalid date. Please try again (mm/dd/yyyy)"
+        if not error_message:
+            if not exp_date:
+                error_message = "A date is required! Please enter one"
+            else:
+                try:
+                    expense_date_obj = datetime.fromisoformat(exp_date)
+                    print(type(expense_date_obj))
+                except ValueError:
+                    error_message = "You have entered an invalid date. Please try again (mm/dd/yyyy)"
 
         if error_message:
             return render_template("AddExpense/add_expense.html",
@@ -81,7 +80,33 @@ def add_expense():
             expense_date=exp_date)
         # else process for adding expense to the db here
 
-        return render_template("AddExpense/add_expense.html", categories=categories, success_message="Expense Saved!")
+        print(exp_title)
+        print(exp_desc)
+        print(exp_amount)
+        print(exp_cat_id)
+        print(exp_date)
+
+        expense = ExpenseTrans(
+            amount=amount,
+            title=exp_title,
+            description=exp_desc,
+            category_id=exp_cat_id,
+            expense_date=expense_date_obj,
+            user_id="1" # user_id from session using 1 as placeholder here
+        )
+
+        try:
+            db.session.add(expense)
+            db.session.commit()
+            print("Added expense!")
+            print(f"Added expense {expense.id}")
+            print("👉 CURRENT ENGINE URL:", db.engine.url)
+            return render_template("AddExpense/add_expense.html", categories=categories, success_message="Expense Saved!")
+        except Exception as e:
+            db.session.rollback()
+            print(f"Unexpected error occurred! {e}")
+
+        
 
 
     if request.method == "GET":

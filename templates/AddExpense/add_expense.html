@@ -1,57 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "navigation.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <title>Penny - Add Expense</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='add_expense.css') }}">
 
-    <link rel="stylesheet" href="static/add_expense.css">
-</head>
+<a class="back" href="#"><span aria-hidden="true">&larr;</span>Back to Expense Table</a>
+<h1>Add a New Expense</h1>
+<div class="expense-card">
+    <form method="POST">
 
-<body>
-<main class="page">
-    <a class="back" href="#"><span aria-hidden="true">&larr;</span>Back to Expense Table</a>
-    <h1>Add a New Expense</h1>
-        <div class="expense-card">
-            <form method="POST">
+            <label for="expense_title">Title</label>
+            <input type="text" id="expense_title" name="expense_title" value="{{ expense_title or '' }}" placeholder="Give your expense a title" maxlength="50" required>
 
-                    <label for="expense_title">Title</label>
-                    <input type="text" id="expense_title" name="expense_title" value="{{ expense_title or '' }}" placeholder="Give your expense a title" maxlength="50" required>
+            <label for="expense_desc">Description</label>
+            <input type="text" id="expense_desc" name="expense_desc" value= "{{ expense_desc or ''}}" placeholder="Enter a brief description" maxlength="100">
 
-                    <label for="expense_desc">Description</label>
-                    <input type="text" id="expense_desc" name="expense_desc" value= "{{ expense_desc or ''}}" placeholder="Enter a brief description" maxlength="100">
+            <label for="expense_amount">Amount</label>
+            <input type="number" id="expense_amount" name="expense_amount" step="0.01" min="0.01" value="{{ expense_amount or '' }}" placeholder="$0.00" required>
 
-                    <label for="expense_amount">Amount</label>
-                    <input type="number" id="expense_amount" name="expense_amount" step="0.01" min="0.01" value="{{ expense_amount or '' }}" placeholder="$0.00" required>
+            <label for="expense_cat">Category</label>
+            <select id="expense_cat" name="expense_category" required>
+                <option value="" disabled selected hidden>Select a category</option>
+                {% for category in categories %}
+                    <option value="{{ category['id'] }}">
+                        {{ category['name']}}
+                    </option>
+                {% endfor %}
+            </select>
+            <label for="expense_date">Date</label>
+            <input type="date" id="expense_date" name="expense_date" value="{{ expense_date or ' '}}" required>
 
-                    <label for="expense_cat">Category</label>
-                    <select id="expense_cat" name="expense_category" required>
-                        <option value="" disabled selected hidden>Select a category</option>
-                        {% for category in categories %}
-                            <option value="{{ category['id'] }}">
-                                {{ category['name']}}
-                            </option>
-                        {% endfor %}
-                    </select>
-                    <label for="expense_date">Date</label>
-                    <input type="date" id="expense_date" name="expense_date" value="{{ expense_date or ' '}}" required>
+        <button type="submit" class="button button-primary">Add Expense</button>
+    </form>
+    {% if error_message %}
+    <div class="error-message">
+        <strong>Error: {{ error_message }}</strong>
+    </div>
+    {% endif %}
 
-                <button type="submit" class="button button-primary">Add Expense</button>
-            </form>
-            {% if error_message %}
-            <div class="error-message">
-                <strong>Error: {{ error_message }}</strong>
-            </div>
-            {% endif %}
+    {% if success_message %}
+    <div class="success_message">
+    <strong>{{ success_message }}</strong>
+    </div>
+    {% endif %}
+</div>
 
-            {% if success_message %}
-            <div class="success_message">
-            <strong>{{ success_message }}</strong>
-            </div>
-            {% endif %}
-        </div>
-</main>
-</body>
-</html>
+{% endblock %}

@@ -6,9 +6,9 @@
 ##To run with debugger: flask --app app run --debug
 from init_extension import db
 from flask import Flask, render_template
-from init_extension import db
 from models import User, ExpenseTrans
 from login_route import login_pages
+from profile_route import profile_bp
 
 app = Flask(__name__)
 
@@ -16,6 +16,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///expense_tracker.db'
 
 db.init_app(app)
 app.register_blueprint(login_pages)
+app.register_blueprint(profile_bp)
 
 with app.app_context():
     db.create_all()

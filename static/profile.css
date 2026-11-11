@@ -51,3 +51,45 @@
   .actions { display: flex; align-items: center; gap: 24px; }
   .cancel { color: var(--muted); text-decoration: none; font-size: 13px; }
 
+  .sidebar {
+  position: fixed;          /* stays in place when the page scrolls */
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;            /* full height of the window */
+  background: #1f2d28;      /* dark green, close to the Save button */
+  color: #fff;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.sidebar-brand {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 32px;
+  padding-left: 12px;
+}
+
+.sidebar-links {
+  list-style: none;         /* remove bullet points */
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-links a {
+  display: block;           /* makes the whole row clickable */
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #dfe7e3;
+  text-decoration: none;
+}
+
+.sidebar-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Push the main content right so it isn't hidden under the sidebar */
+.page {
+  margin-left: 220px;
+}

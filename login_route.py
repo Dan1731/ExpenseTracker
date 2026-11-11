@@ -113,6 +113,17 @@ def signup():
                 show_signup=True
             )
 
+        if not username.isalnum():
+            return render_template(
+                "Logins/login.html",
+                username_error="Username cannot contain special characters or spacing.",
+                username=username,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                show_signup=True
+            )
+
         # Check if username exists in database:
         existing_user = db.session.execute(
             db.select(User).filter_by(username=username)

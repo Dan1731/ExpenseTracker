@@ -1,6 +1,7 @@
 import unittest
 
 from app import create_app
+from email_validator import validate_email
 from init_extension import db
 from models import User
 from unittest.mock import patch
@@ -8,10 +9,29 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class TestSignup(unittest.TestCase):
     def setUp(self):
-        self.app = create_app()
-        self.app.config["TESTING"] = True
+        self.app = create_app({
+            "TESTING": True,
+            "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:"
+        })
+
+        self.context = self.app.app_context()
+        self.context.push()
 
         self.client = self.app.test_client()
+        self.email_patch = patch(
+            "login_route.validate_email",
+            side_effect=self.validate_test_email
+        )
+        self.email_patch.start()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.email_patch.stop()
+        self.context.pop()
+
+    def validate_test_email(self, email, **kwargs):
+        return validate_email(email, check_deliverability=False)
 
     ### MISSING TESTS ###
     def test_missingFirstName_returnsErrorMessage(self):
@@ -126,7 +146,7 @@ class TestSignup(unittest.TestCase):
                     "username": "how dare you!",
                     "email": "test@example.com",
                     "password": "Password123",
-                    "confirm_password": ""
+                    "confirm_password": "Password123"
                 })
         
         self.assertEqual(response.status_code, 200)
@@ -138,7 +158,7 @@ class TestSignup(unittest.TestCase):
             "first_name": "John",
             "last_name": "Smith",
             "username": "johnsmith",
-            "email": "notanemail@email.com",
+            "email": "notanemail",
             "password": "Password123",
             "confirm_password": "Password123"
         })
@@ -232,7 +252,7 @@ class TestSignup(unittest.TestCase):
             existing_user = User(
                 first_name="Jane",
                 last_name="Doe",
-                username="NewUser",
+                username="newuser",
                 email="existing@example.com",
                 password_hash=generate_password_hash("Password123")
             )

@@ -10,25 +10,33 @@ from models import User, ExpenseTrans
 from login_route import login_pages
 from profile_route import profile_bp
 
-app = Flask(__name__)
+def create_app(test_config=None):
+    app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///expense_tracker.db'
+    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///expense_tracker.db'
 
-db.init_app(app)
-app.register_blueprint(login_pages)
-app.register_blueprint(profile_bp)
+    if test_config:
+        app.config.update(test_config)
 
-with app.app_context():
-    db.create_all()
+    db.init_app(app)
+    app.register_blueprint(login_pages)
+    app.register_blueprint(profile_bp)
 
-@app.route('/add_expense', methods=['GET', 'POST'])
-def add_expense():
-    pass
+    @app.route('/add_expense', methods=['GET', 'POST'])
+    def add_expense():
+        pass
 
-# User goes to expense table for now when sign in successful.
-@app.route("/expenses")
-def expenses():
-    return render_template("ExpenseTable/table.html")
+    # User goes to expense table for now when sign in successful.
+    @app.route("/expenses")
+    def expenses():
+        return render_template("ExpenseTable/table.html")
+
+    with app.app_context():
+        db.create_all()
+
+    return app
+
+app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True) 

@@ -5,10 +5,11 @@
 ##To run the app: flask --app app run
 ##To run with debugger: flask --app app run --debug
 from init_extension import db
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from models import User, ExpenseTrans
 from login_route import login_pages
 from profile_route import profile_bp
+from add_expense_route import add_expenses
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -21,10 +22,7 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_blueprint(login_pages)
     app.register_blueprint(profile_bp)
-
-    @app.route('/add_expense', methods=['GET', 'POST'])
-    def add_expense():
-        pass
+    app.register_blueprint(add_expenses)
 
     # User goes to expense table for now when sign in successful.
     @app.route("/expenses")

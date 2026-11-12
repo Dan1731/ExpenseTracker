@@ -77,14 +77,23 @@ class TestExpenses(unittest.TestCase):
         db.drop_all()
         self.context.pop()
 
+    def test_calculation_returnsTotalExpenses(self):
+        total_expenses = sum(expense["amount"] for expense in self.expenses)
 
-    ### Expense Calculation Tests ###
-    # To Do whenever Miles completes button logic.
-    #
-    # def test_calculation_returnsTotalExpenses(self):
-        # response = self.client.get("/expenses")
-        # self.assertEqual(response.status_code, 200)
-        # self.assertIn(b"$2,944.61", response.data)
+        self.assertEqual(total_expenses, Decimal("2944.61"))
+
+    def test_calculation_returnsTotalTransactions(self):
+        total_transactions = len(self.expenses)
+
+        self.assertEqual(total_transactions, 7)
+
+    def test_calculation_returnsLargestExpense(self):
+        largest_expense = max(
+            (expense["amount"] for expense in self.expenses),
+            default=0
+        )
+
+        self.assertEqual(largest_expense, Decimal("2500.00"))
 
     # def test_overview_returnsLargestExpense
         # response = self.client.get("/expenses")

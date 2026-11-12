@@ -84,7 +84,9 @@ body {
 }
 
 .largest-expense-summary h2 { color: white; }
-.largest-expense-summary p
+.largest-expense-summary p {
+    color: #d8e2db;
+}
 
 /* Table Header */
 .table-header {
@@ -138,11 +140,10 @@ thead {
     background: #eff5eec2; 
 }
 
-th {
+th, td {
     padding: 15px;
-    text-align: left;
-    border-bottom: 2px solid #b2cdb9;
-    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 th:first-child {

@@ -1,53 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "navigation.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <title>Expense Tracking</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='ExpenseTable/table.css') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='ExpenseTable/table.css') }}">
-</head>
+<div class="expense-dashboard">
 
+    <!--- Header -->
+    <div class="page-header">
+        <div>
+            <p class="page-subtitle">PENNY / EXPENSES</p>
+            <h1>Expense Table</h1>
+        </div>
 
-<body>
-    <div class="table-container">
-        <h2>Expenses</h2>
-
-        <button type="button" class="table-button">Add</button>
-        <input type="category-select" id="category-filter" name="category" value="all" placeholder="Categories">
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="dateStart-filter" placeholder="Range">
-
-        <label for="end-date">End Date:</label>
-        <input type="date" id="dateEnd-filter" placeholder="Range">
-
-        <table>
-            <thead>
-                <tr>
-                    <th><input type="checkbox" id="select-all"></th>
-                    <th>Date</th>
-                    <th>Expense</th>
-                    <th>Amount($)</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <td><input type="checkbox" class="row-checkbox"></td>
-                <td></td>
-            </tbody>
-
-            <tfoot>
-                <tr>
-                    <td colspan="3">Total Expenses</td>
-                </tr>
-            </tfoot>
-        </table>
+        <button type="button" class="table-button">
+            + Add Expense/ Category
+        </button>
     </div>
-    
-</body>
 
-</html>
+    <!-- Overview -->
+    <div class="expense-summary">
+        <div class="expense-overview">
+            <p>Total Expenses</p>
+            <h2 id="summary-total">$0.00</h2>
+            <span>Date Range</span>
+        </div>
+
+        <div class="expense-total-summary">
+            <p>Transactions</p>
+            <h2 id="summary-count">0</h2>
+            <span>Total Expenses</span>
+        </div>
+
+        <div class="largest-expense-summary">
+            <p>Largest Expense</p>
+            <h2 id="summary-largest">$0.00</h2>
+            <span>In selected period</span>
+        </div>
+    </div>
+
+    <!--- Expense Table -->
+    <div class="table-container">
+
+        <div class="table-header">
+            <h2>Expense Items</h2>
+            <span id="expense-count">0 expenses</span>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="table-filters">
+            <input type="search"
+                   id="search-filter"
+                   placeholder="Search expenses">
+
+            <select id="category-filter" name="category">
+                <option value="all">All Categories</option>
+            </select>
+
+            <label for="dateStart-filter">Start Date:</label>
+            <input type="date" id="dateStart-filter">
+
+            <label for="dateEnd-filter">End Date:</label>
+            <input type="date" id="dateEnd-filter">
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="select-all">
+                        </th>
+                        <th>Date</th>
+                        <th>Expense</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount($)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="expense-table-body">
+                    <!-- Expense rows populated here -->
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="5">Total Expenses</td>
+                        <td id="total-expenses">$0.00</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

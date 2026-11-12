@@ -8,22 +8,26 @@ from unittest.mock import patch
 from werkzeug.security import generate_password_hash, check_password_hash
 
 class TestSignup(unittest.TestCase):
+    ### Runs before every test.
     def setUp(self):
         self.app = create_app({
             "TESTING": True,
-            "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:"
+            "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:" # Test in-memory database using SQLite
         })
 
+        ### Creates a test client that mocks a HTTP request.
         self.context = self.app.app_context()
         self.context.push()
-
         self.client = self.app.test_client()
+
+        ### Tests depend on email validation.
         self.email_patch = patch(
             "login_route.validate_email",
             side_effect=self.validate_test_email
         )
         self.email_patch.start()
 
+    ### Runs after every test.
     def tearDown(self):
         db.session.remove()
         db.drop_all()

@@ -42,11 +42,11 @@ def login():
     ).scalar_one_or_none()
 
     if user is None or not check_password_hash(
-    user.password_hash, password_input
+        user.password_hash, password_input
     ):
-            return render_template(
+        return render_template(
             "Logins/login.html",
-            login_error="Invalid username/email or password."
+            login_error="Incorrect user or password. Try again."
         )
 
     # Redirect to expense table if credentials are verified.

@@ -82,6 +82,10 @@
                         <p class="success-message">{{ success_message }}</p>
                     {% endif %}
 
+                    {% if login_error %}
+                        <p class="error-message">{{ login_error }}</p>
+                    {% endif %}
+
                     <form id="loginForm" method="POST" action="{{ url_for('login_route.login') }}">
 
                         <div class="form-group">

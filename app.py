@@ -29,7 +29,11 @@ def create_app(test_config=None):
     # User goes to expense table for now when sign in successful.
     @app.route("/expenses")
     def expenses():
-        return render_template("ExpenseTable/table.html")
+        expenses = db.session.execute(db.select(ExpenseTrans)).scalars().all()
+        return render_template(
+            "ExpenseTable/table.html",
+            expenses=expenses
+        )
 
     with app.app_context():
         db.create_all()

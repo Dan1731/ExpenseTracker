@@ -100,7 +100,6 @@ def add_expense():
             db.session.commit()
             print("Added expense!")
             print(f"Added expense {expense.id}")
-            print("👉 CURRENT ENGINE URL:", db.engine.url)
             return render_template("AddExpense/add_expense.html", categories=categories, success_message="Expense Saved!")
         except Exception as e:
             db.session.rollback()

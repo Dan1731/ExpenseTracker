@@ -1,15 +1,15 @@
 ##Purpose: create Flask app
 ##Author(s): Layce Smith, Miles Devine, Claudia Vargas
-##Last Updated: 10/21/2026
+##Last Updated: 11/11/2026
 ##To activate environment (Windows): .venv\Scripts\activate
 ##To run the app: flask --app app run
 ##To run with debugger: flask --app app run --debug
+from add_expense_route import add_expenses
 from init_extension import db
 from flask import Flask, render_template, session
 from models import User, ExpenseTrans
 from login_route import login_pages
 from profile_route import profile_bp
-from add_expense_route import add_expenses
 
 def create_app(test_config=None):
     app = Flask(__name__)

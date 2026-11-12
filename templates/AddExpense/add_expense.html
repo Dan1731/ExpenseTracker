@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='add_expense.css') }}">
 
-<a class="back" href="#"><span aria-hidden="true">&larr;</span>Back to Expense Table</a>
+<a class="back" href="{{ url_for('expenses') }}"><span aria-hidden="true">&larr;</span>Back to Expense Table</a>
 <h1>Add a New Expense</h1>
 <div class="expense-card">
     <form method="POST">

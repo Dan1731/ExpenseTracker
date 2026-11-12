@@ -42,11 +42,11 @@ def login():
     ).scalar_one_or_none()
 
     if user is None or not check_password_hash(
-    user.password_hash, password_input
+        user.password_hash, password_input
     ):
-            return render_template(
+        return render_template(
             "Logins/login.html",
-            login_error="Invalid username/email or password."
+            login_error="Incorrect user or password. Try again."
         )
 
     # Redirect to expense table if credentials are verified.
@@ -106,6 +106,17 @@ def signup():
             return render_template(
                 "Logins/login.html",
                 username_error="Username must be between 4 and 15 characters.",
+                username=username,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                show_signup=True
+            )
+
+        if not username.isalnum():
+            return render_template(
+                "Logins/login.html",
+                username_error="Username cannot contain special characters or spacing.",
                 username=username,
                 first_name=first_name,
                 last_name=last_name,

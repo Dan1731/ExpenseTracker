@@ -52,7 +52,7 @@ This week, the team completed the following items from the backlog:
 ---
 
 ## Planned Tasks for Next Week
-Work on backlog items:
+Work on remaining backlog items:
 - User Session
 - Data isolation for multi users
 - Add page navigation between pages
@@ -60,6 +60,8 @@ Work on backlog items:
 - Determine task priorities for the upcoming week and divvy up the work
 
 ---
+
+## Individual Contributions This Week
 
 ---
 
@@ -93,7 +95,7 @@ This week, the team demoed working pages running locally on the Flask app:
 ---
 
 ## Planned Tasks for Next Week
-Work on backlog items:
+Work on remaining backlog items:
 - Login Validation
 - Account Registration Validation
 - User Session
@@ -149,6 +151,7 @@ Finally, the team walked through the Trello board to review task status.
 ---
 
 ## Planned Tasks for Next Week
+Work on remaining backlog items:
 - Finish Design Database (In Progress)
 - Finish User Login Page (In Progress)
 - Review and merge SignIn/SignUp .css files (In Review)

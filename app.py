@@ -6,7 +6,8 @@
 ##To run with debugger: flask --app app run --debug
 from add_expense_route import add_expenses
 from init_extension import db
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request, redirect, url_for
+from sqlalchemy import or_
 from models import User, ExpenseTrans, ExpenseCat
 from login_route import login_pages
 from profile_route import profile_bp
@@ -23,6 +24,29 @@ def create_app(test_config=None):
     app.register_blueprint(login_pages)
     app.register_blueprint(profile_bp)
     app.register_blueprint(add_expenses)
+
+    app.config["SECRET_KEY"] = "dev"  # Change this to a random value in production
+
+    # Save the logged-in user to the session without changing login_route.py.
+    # login() redirects only when the password check passes, so a redirect
+    # from that endpoint means the login succeeded.
+    @app.after_request
+    def remember_login(response):
+        if request.endpoint == "login_route.login" and response.status_code == 302:
+            login_input = (request.form.get("login") or "").strip().lower()
+            user = db.session.execute(
+                db.select(User).where(
+                    or_(User.username == login_input, User.email == login_input)
+                )
+            ).scalar_one_or_none()
+            if user:
+                session["username"] = user.username
+        return response
+
+    @app.route("/logout")
+    def logout():
+        session.clear()
+        return redirect(url_for("login_route.home"))
 
     # User goes to expense table for now when sign in successful.
     @app.route("/expenses")

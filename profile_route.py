@@ -2,7 +2,7 @@
 ##Author(s): Layce Smith
 ##Last Updated: 11/04/2026
 
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from init_extension import db
 from models import User
 
@@ -39,6 +39,8 @@ def profile(username):
             user.last_name = last_name
             user.email = email
             db.session.commit()
+            # Keep the sidebar's Profile link pointing at the new username
+            session["username"] = user.username
             # Redirect so a page refresh doesn't resubmit the form,
             # and so the URL matches the username if it changed
             return redirect(url_for("profile.profile", username=user.username))

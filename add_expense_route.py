@@ -3,7 +3,7 @@ import decimal
 from datetime import datetime
 from decimal import Decimal
 from models import User, ExpenseTrans, ExpenseCat
-from sqlalchemy import or_
+from sqlalchemy import text
 from flask import Blueprint, render_template, request, redirect, url_for, session
 
 add_expenses = Blueprint("add_expense_route", __name__)
@@ -11,14 +11,30 @@ add_expenses = Blueprint("add_expense_route", __name__)
 @add_expenses.route('/add_expense', methods=['GET', 'POST'])
 def add_expense():
     error_message = None
+    
+    if 'username' not in session: # Send back to login screen if the username is not present in the session variable
+        return redirect(url_for("login"))
+    
+    username = session.get('username')
+    
+    user_id_query = text("""
+    SELECT users.id
+    FROM users
+    WHERE users.username = :username
+    """)
+    
+    user_id = db.session.execute(user_id_query, {"username" : username}).scalar()
+    
+    categories_query = text("""
+    SELECT expense_cats.name, expense_cats.id
+    FROM expense_cats
+    WHERE expense_cats.user_id = :user_id OR
+    expense_cats.user_id IS NULL
+    """) # Categories that only the logged in user should have access to
 
-    statement = db.select(ExpenseCat.name, ExpenseCat.id)
-    categories = db.session.execute(statement).mappings().all()
+    categories = db.session.execute(categories_query, {"user_id" : user_id}).mappings().all()
+    
     if request.method == "POST":
-        # if not 'user_id' in session: // Send back to login screen if the user ID is not present in the session variable
-        #     return redirect(url_for("login"))
-
-        # user_id = session.get("user_id")
 
         # get information from our form
 
@@ -53,7 +69,6 @@ def add_expense():
                 except (decimal.InvalidOperation, ValueError, TypeError):
                     error_message = "Your last amount input had an invalid format. Please try again (must be be greater than $0.00 and use standard currency notation)"
 
-        # category validation. Need to make sure that the category that's entered is one of the user's categories ??
         if not error_message:
             if not exp_cat_id:
                 error_message = "An expense category is required! Please select one from the list"
@@ -78,21 +93,14 @@ def add_expense():
             expense_amount=exp_amount,
             expense_cat=exp_cat_id,
             expense_date=exp_date)
-        # else process for adding expense to the db here
-
-        print(exp_title)
-        print(exp_desc)
-        print(exp_amount)
-        print(exp_cat_id)
-        print(exp_date)
-
+        
         expense = ExpenseTrans(
             amount=amount,
             title=exp_title,
             description=exp_desc,
             category_id=exp_cat_id,
             expense_date=expense_date_obj,
-            user_id="1" # user_id from session using 1 as placeholder here
+            user_id=user_id # user_id 
         )
 
         try:
@@ -105,20 +113,5 @@ def add_expense():
             db.session.rollback()
             print(f"Unexpected error occurred! {e}")
 
-        
-
-
     if request.method == "GET":
-        statement = db.select(ExpenseCat.name, ExpenseCat.id) # select statement for now that we don't have user's
-
-        # when we have users
-
-        # statement = db.select(ExpenseCat.name, ExpenseCat.id).where(
-        #     or_(
-        #         (ExpenseCat.user_id == user_id),
-        #         (ExpenseCat.user_id == None)
-        #         )
-        #     )
-        categories = db.session.execute(statement).mappings().all()
-
         return render_template("AddExpense/add_expense.html", categories=categories)

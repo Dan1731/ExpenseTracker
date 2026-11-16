@@ -72,6 +72,15 @@ label {
     margin-bottom: 5px;
 }
 
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
+}
+
+
 .button { font: inherit; font-size: 12px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; cursor: pointer; align-self: flex-end; }
 .button:hover { border-color: var(--muted); }
 

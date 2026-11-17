@@ -13,7 +13,7 @@ def add_expense():
     error_message = None
     
     if 'username' not in session: # Send back to login screen if the username is not present in the session variable
-        return redirect(url_for("login"))
+        return redirect(url_for("login_route.home"))
     
     username = session.get('username')
     

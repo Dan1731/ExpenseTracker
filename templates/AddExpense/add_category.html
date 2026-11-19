@@ -1,0 +1,26 @@
+{% extends "navigation.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='add_expense.css') }}">
+
+<a class="back" href="{{ url_for('add_expense_route.add_expense') }}"><span aria-hidden="true">&larr;</span>Add Expenses</a>
+<h1>Create a New Category</h1>
+<div class="expense-card">
+    <form method="POST">
+            <button type="submit" class="button button-primary">Add Category</button>
+    </form>
+    {% if error_message %}
+    <div class="error-message">
+        <strong>Error: {{ error_message }}</strong>
+    </div>
+    {% endif %}
+
+    {% if success_message %}
+    <div class="success_message">
+    <strong>{{ success_message }}</strong>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -31,7 +31,7 @@
             <input type="date" id="expense_date" name="expense_date" value="{{ expense_date or ' '}}" required>
         <div class="button-group">
             <button type="submit" class="button button-primary">Add Expense</button>
-            <button type="button" class="button button-primary">Add Category</button>
+            <a href="{{ url_for('add_expense_route.add_category') }}" class="button button-primary">Add Category</a>
         </div>
     </form>
     {% if error_message %}

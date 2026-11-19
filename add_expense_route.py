@@ -8,6 +8,66 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 
 add_expenses = Blueprint("add_expense_route", __name__)
 
+@add_expenses.route('/add_category', methods=['GET', 'POST'])
+def add_category():
+    error_message = None
+        
+    if 'username' not in session: # Send back to login screen if the username is not present in the session variable
+        return redirect(url_for("login_route.home"))
+    
+    username = session.get('username')
+        
+    user_id_query = text("""
+    SELECT users.id
+    FROM users
+    WHERE users.username = :username
+    """)
+        
+    user_id = db.session.execute(user_id_query, {"username" : username}).scalar()
+    
+    if request.method == "POST":
+        category_name = request.form.get('category_name')
+        print(f"CATEGORY: {category_name}")
+        
+        category_exists_query = text("""
+        SELECT EXISTS (
+            SELECT 1
+            FROM expense_cats
+            WHERE LOWER(expense_cats.name) = LOWER(TRIM(:cat_name)) AND
+            expense_cats.user_id = :user_id OR 
+            LOWER(expense_cats.name) = LOWER(TRIM(:cat_name)) AND expense_cats.user_id IS NULL
+        )
+        """)
+        
+        existing_category = db.session.execute(
+            category_exists_query,
+            {"cat_name" : category_name, "user_id" : user_id}
+        ).scalar()
+        
+        if existing_category: # Check that the category doesn't already exist in expense_cats
+            error_message = "That category already exists. Please try again!"
+            return render_template("AddExpense/add_category.html",
+                            category_name=category_name,
+                            error_message=error_message)
+        
+        add_category_query = text("""
+        INSERT INTO expense_cats (name, user_id) VALUES (:cat_name, :user_id)
+        """)
+        
+        try:
+            db.session.execute(add_category_query, {"cat_name" : category_name, "user_id" : user_id})
+            db.session.commit()
+            print("Added new category name!")
+            print(f"Added category {category_name}")
+            return render_template("AddExpense/add_category.html", success_message="Category Added!")
+        except Exception as e:
+            db.session.rollback()
+            print(f"Unexpected error occurred! {e}")
+        
+        
+    else:
+        return render_template("AddExpense/add_category.html")
+
 @add_expenses.route('/add_expense', methods=['GET', 'POST'])
 def add_expense():
     error_message = None

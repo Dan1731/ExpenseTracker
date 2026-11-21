@@ -8,7 +8,7 @@ from add_expense_route import add_expenses
 from datetime import datetime, timedelta
 from init_extension import db
 from flask import Flask, render_template, session, request, redirect, url_for
-from sqlalchemy import or_
+from sqlalchemy import or_, text
 from models import User, ExpenseTrans, ExpenseCat
 from login_route import login_pages
 from profile_route import profile_bp
@@ -49,6 +49,67 @@ def create_app(test_config=None):
     def logout():
         session.clear()
         return redirect(url_for("login_route.home"))
+    
+    @app.route("/dashboard")
+    def dashboard():
+        
+        if 'username' not in session: # Send back to login screen if the username is not present in the session variable
+                return redirect(url_for("login_route.home"))
+            
+        username = session.get('username')
+            
+        user_id_query = text("""
+        SELECT users.id
+        FROM users
+        WHERE users.username = :username
+        """)
+        
+        user_id = db.session.execute(user_id_query, {"username" : username}).scalar()
+        
+        conditions = [] # list of conditions
+        parameters = {"user_id" : user_id} # dict of parameters, we will always need the user_id
+
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        category = request.form.get('category')
+        upper_amount = request.form.get('upper_amount')
+        lower_amount = request.form.get('lower_amount')
+
+        if start_date:
+            conditions.append("expense_trans.expense_date >= :start_date")
+            parameters["start_date"] = start_date
+
+        if end_date:
+            conditions.append("expense_trans.expense_date <= :end_date")
+            parameters["end_date"] = end_date
+            
+        if category:
+            conditions.append("expense_cats.name = :category")
+            parameters["category"] = category
+            
+        if upper_amount:
+            conditions.append("expense_trans.amount <= :upper_amount")
+            parameters["upper_amount"] = upper_amount
+
+        if lower_amount:
+            conditions.append("expense_trans.amount >= :lower_amount")
+            parameters["lower_amount"] = lower_amount
+
+        clause = " AND ".join(conditions)
+
+        query = text(f"""
+            SELECT
+            expense_trans.title, expense_trans.amount, expense_trans.expense_date,
+            expense_cats.name AS cat_name
+            FROM expense_trans
+            JOIN expense_cats on expense_cats.id = expense_trans.category_id
+            WHERE {clause}
+            """
+        )
+        
+        print(query)
+            
+        result = db.session.execute(query, params=parameters).mappings().all()
 
     # User goes to expense table for now when sign in successful.
     @app.route("/expenses")

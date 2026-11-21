@@ -44,26 +44,39 @@
         </div>
 
         <!-- FILTERS -->
-        <div class="table-filters">
+        <form method="GET" action="{{ url_for('expenses') }}" class="table-filters">
             <input type="search"
-                   id="search-filter"
-                   placeholder="Search expenses">
+                id="search-filter"
+                name="search"
+                value="{{ search_title }}"
+                placeholder="Search expenses by title"
+                oninput="this.form.requestSubmit()">
 
-            <select id="category-filter" name="category">
-                <option value="all">All Categories</option>
+            <select id="category-filter" name="category" onchange="this.form.submit()">
+                <option value="all" {% if filtered_category == "all" %}selected{% endif %}>All Categories</option>
+
                 {% for category in categories %}
-                    <option value="{{ category['id'] }}">
+                    <option value="{{ category['id'] }}"
+                        {% if filtered_category == category['id']|string %}selected{% endif %}>
                         {{ category['name'] }}
                     </option>
                 {% endfor %}
             </select>
 
             <label for="dateStart-filter">Start Date:</label>
-            <input type="date" id="dateStart-filter">
+            <input type="date"
+                id="dateStart-filter"
+                name="start_date"
+                value="{{ start_date }}"
+                onchange="this.form.submit()">
 
             <label for="dateEnd-filter">End Date:</label>
-            <input type="date" id="dateEnd-filter">
-        </div>
+            <input type="date"
+                id="dateEnd-filter"
+                name="end_date"
+                value="{{ end_date }}"
+                onchange="this.form.submit()">
+        </form>
 
         <div class="table-wrapper">
             <table>
@@ -92,9 +105,24 @@
                         <td>{{ expense.category.name }}</td>
                         <td>{{ expense.description or '' }}</td>
                         <td>${{ "{:,.2f}".format(expense.amount) }}</td>
+                        <td class="action-class">
+                           <button type="button" class="action-button" aria-label="Expense actions">
+                                &#8230;
+                            </button>
 
-                        <td>
-                            <!-- Edit and Delete here -->
+                            <div class="action-menu" hidden>
+                                <a href="{{ url_for('add_expense_route.edit_expense', expense_id=expense.id) }}">Edit</a>
+                                
+                                <form method="POST"
+                                    action="{{ url_for('add_expense_route.delete_expense', expense_id=expense.id) }}"
+                                    onsubmit="return confirm('Are you sure you want to delete this expense?');">
+                                    <button type="submit">Delete</button>
+                                </form>
+
+                                <form method="POST" action="{{ url_for('add_expense_route.copy_expense', expense_id=expense.id) }}">
+                                    <button type="submit">Copy</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     {% endfor %}
@@ -103,6 +131,7 @@
         </div>
 
     </div>
+    <script src="{{ url_for('static', filename='ExpenseTable/table.js') }}"></script>
 </div>
 
 {% endblock %}

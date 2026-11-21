@@ -4,7 +4,7 @@ from datetime import datetime
 from decimal import Decimal
 from models import User, ExpenseTrans, ExpenseCat
 from sqlalchemy import text
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, abort
 
 add_expenses = Blueprint("add_expense_route", __name__)
 
@@ -175,3 +175,153 @@ def add_expense():
 
     if request.method == "GET":
         return render_template("AddExpense/add_expense.html", categories=categories)
+
+# When user edits an expense, open the Edit Expense page with its existing values.
+@add_expenses.route("/edit_expense/<int:expense_id>", methods=["GET", "POST"])
+def edit_expense(expense_id):
+    if 'username' not in session:
+        return redirect(url_for("login_route.home"))
+
+    # Get logged in user.
+    user_id = db.session.execute(
+        db.select(User.id).where(User.username == session['username'])
+    ).scalar()
+
+    # Get expense.
+    expense = db.get_or_404(ExpenseTrans, expense_id)
+
+    # Check that the expense belongs to the user.
+    if user_id is None or expense.user_id != user_id:
+        abort(404)
+
+    # Include predefined categories and categories created by this user.
+    categories = db.session.execute(
+        db.select(ExpenseCat.name, ExpenseCat.id).where(
+            (ExpenseCat.user_id == user_id) | (ExpenseCat.user_id.is_(None))
+        )
+    ).mappings().all()
+
+    # Fill the form with existing values.
+    exp_title = expense.title
+    exp_desc = expense.description
+    exp_amount = expense.amount
+    exp_cat_id = expense.category_id
+    exp_date = expense.expense_date.strftime("%Y-%m-%d")
+    error_message = None
+
+    if request.method == "POST":
+        # Get updated information from the form.
+        exp_title = request.form.get("expense_title", "").strip()
+        exp_desc = request.form.get("expense_desc", "")
+        exp_amount = request.form.get("expense_amount", "")
+        exp_cat_id = request.form.get("expense_category", "")
+        exp_date = request.form.get("expense_date", "")
+
+        # Validate the updated expense.
+        if not exp_title or len(exp_title) > 50:
+            error_message = "Title must be between 1 and 50 characters."
+        elif len(exp_desc) > 100:
+            error_message = "Description cannot exceed 100 characters."
+
+        if not error_message:
+            try:
+                amount = Decimal(exp_amount)
+                if not amount.is_finite() or amount <= 0 or amount.as_tuple().exponent < -2:
+                    raise ValueError()
+            except (decimal.InvalidOperation, ValueError, TypeError):
+                error_message = "Invalid expense amount."
+
+        if not error_message:
+            if not exp_cat_id.isdigit() or not any(
+                str(category['id']) == exp_cat_id for category in categories
+            ):
+                error_message = "Select a valid category."
+
+        if not error_message:
+            try:
+                expense_date_obj = datetime.fromisoformat(exp_date)
+            except ValueError:
+                error_message = "Invalid expense date."
+
+        # Save changes to the existing expense, including the selected category.
+        if not error_message:
+            expense.title = exp_title
+            expense.description = exp_desc
+            expense.amount = amount
+            expense.category_id = int(exp_cat_id)
+            expense.expense_date = expense_date_obj
+
+            try:
+                db.session.commit()
+                return redirect(url_for("expenses"))
+            except Exception:
+                db.session.rollback()
+                error_message = "Unable to save expense changes."
+
+    return render_template(
+        "AddExpense/edit_expense.html",
+        categories=categories,
+        error_message=error_message,
+        expense_title=exp_title,
+        expense_desc=exp_desc,
+        expense_amount=exp_amount,
+        expense_cat=exp_cat_id,
+        expense_date=exp_date
+    )
+
+# Delete expense from table:
+@add_expenses.route("/delete_expense/<int:expense_id>", methods=["POST"])
+def delete_expense(expense_id):
+    if 'username' not in session:
+        return redirect(url_for("login_route.home"))
+
+    # Get logged in user.
+    user_id = db.session.execute(
+        db.select(User.id).where(User.username == session['username'])
+    ).scalar()
+
+    # Get expense.
+    expense = db.get_or_404(ExpenseTrans, expense_id)
+
+    # Check that the expense belongs to the user.
+    if user_id is None or expense.user_id != user_id:
+        abort(404)
+
+    # Delete expense.
+    db.session.delete(expense)
+    db.session.commit()
+
+    return redirect(url_for("expenses"))
+
+# Copy an expense from table:
+@add_expenses.route("/copy_expense/<int:expense_id>", methods=["POST"])
+def copy_expense(expense_id):
+    if 'username' not in session:
+        return redirect(url_for("login_route.home"))
+
+    # Get logged in user.
+    user_id = db.session.execute(
+        db.select(User.id).where(User.username == session['username'])
+    ).scalar()
+
+    # Get expense.
+    expense = db.get_or_404(ExpenseTrans, expense_id)
+
+    # Check that the expense belongs to the user.
+    if user_id is None or expense.user_id != user_id:
+        abort(404)
+
+    # Create the copied expense.
+    copied_expense = ExpenseTrans(
+        title=expense.title,
+        description=expense.description,
+        amount=expense.amount,
+        category_id=expense.category_id,
+        expense_date=expense.expense_date,
+        user_id=user_id
+    )
+
+    db.session.add(copied_expense)
+    db.session.commit()
+
+    return redirect(url_for("expenses"))

@@ -5,6 +5,7 @@
 ##To run the app: flask --app app run
 ##To run with debugger: flask --app app run --debug
 from add_expense_route import add_expenses
+from datetime import datetime, timedelta
 from init_extension import db
 from flask import Flask, render_template, session, request, redirect, url_for
 from sqlalchemy import or_
@@ -41,6 +42,7 @@ def create_app(test_config=None):
             ).scalar_one_or_none()
             if user:
                 session["username"] = user.username
+                session["user_id"] = user.id
         return response
 
     @app.route("/logout")
@@ -51,7 +53,29 @@ def create_app(test_config=None):
     # User goes to expense table for now when sign in successful.
     @app.route("/expenses")
     def expenses():
-        expenses = db.session.execute(db.select(ExpenseTrans)).scalars().all()
+        # Default fiilters:
+        filtered_category = request.args.get("category", "all")
+        start_date = request.args.get("start_date", "")
+        end_date = request.args.get("end_date", "")
+        search_title = request.args.get("search", "").strip()
+
+        expense = db.select(ExpenseTrans)
+
+        # Category filters.
+        if filtered_category.isdigit():
+            expense = expense.where(ExpenseTrans.category_id == int(filtered_category))
+
+        # Date filters:
+        if start_date:
+            expense = expense.where(ExpenseTrans.expense_date >= datetime.fromisoformat(start_date))
+        if end_date:
+            expense = expense.where(ExpenseTrans.expense_date < datetime.fromisoformat(end_date) + timedelta(days=1))
+
+        # Search expenses by title.
+        if search_title:
+            expense = expense.where(ExpenseTrans.title.ilike(f"%{search_title}%"))
+
+        expenses = db.session.execute(expense).scalars().all()
         categories = db.session.execute(db.select(ExpenseCat.name, ExpenseCat.id)).mappings().all()
 
         # Overview amounts:
@@ -65,7 +89,11 @@ def create_app(test_config=None):
             categories=categories,
             total_expenses=total_expenses,
             total_transactions=total_transactions,
-            largest_expense=largest_expense
+            largest_expense=largest_expense,
+            filtered_category=filtered_category,
+            start_date= start_date,
+            end_date=end_date,
+            search_title=search_title
         )
 
     with app.app_context():

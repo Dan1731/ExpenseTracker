@@ -29,6 +29,112 @@ At the time of this report:
 ---
 
 ## Reporting Period
+**Week:** 9 <br>
+**Meeting Held:** No <br>
+**Date:** November 23, 2026
+Team opted not to meet during Thanksgiving Break but communicated updates via Email.
+
+
+
+
+---
+
+## Reporting Period
+**Week:** 8 <br>
+**Meeting Held:** Yes <br>
+**Meeting Date:** November 16, 2026 <br>
+**Meeting Duration:** 20 minutes <br>
+**Meeting Format:** Zoom <br>
+**Meeting Recording:** (https://o365coloradoedu-my.sharepoint.com/personal/mide6922_colorado_edu/_layouts/15/stream.aspx?id=%2Fpersonal%2Fmide6922%5Fcolorado%5Fedu%2FDocuments%2FAttachments%2Fvideo1588372712%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E33e1f0d3%2D579a%2D427e%2Dac91%2Df7e3cdb5c9e9)
+
+---
+
+## Progress Since Last Week
+
+Since the last meeting, the app's pages are connected and users can move through it end to end:
+
+- **User sessions and data isolation:** Queries now use the session variable. Users see only the categories they created, and each transaction they post is tied to the logged-in user. The session check lives in the app file, so any route can send a logged-out user back to the login page.
+- **Page navigation:** The side navigation panel now links every page except the dashboard. Logout ends the session and returns the user to the sign-in page.
+- **Add Expense page fixes:** The side panel was cut off on the Add Expense page in smaller windows. Miles adjusted the page, and it displayed correctly by the end of the meeting. A build error came up when clicking "Add Expense" while not signed in. The redirect path to the login page needs updating.
+- **Custom categories:** The team agreed to add an "Add Category" button on the right side of the Add Expense page. It will open a page where users can add categories and then send them back to Add Expense. This work is in progress on a local branch.
+- **Dashboard research:** The team ruled out Tableau, because its dashboards are built around a shared dataset and can't easily limit each user to their own data. The dashboard will use a Flask route that returns JSON, with Plotly for the charts. Chart.js and Jinja templates are the backups.
+- **Trello cleanup:** The team reviewed the board and moved finished items to Done.
+
+---
+
+## Completed Tasks
+
+- User session handling, including per-user data isolation for categories and transactions
+- Logout and session end (marked done pending unit tests)
+- Login validation
+- Page navigation between pages via the side panel
+- Keeping entered values on the Add Expense form when a submission has an error
+- Researched dashboard options and chose Flask JSON + Plotly
+- Unit tests for the expense table and login
+
+---
+
+## Planned Tasks for Next Week
+- Fix the Add Expense redirect path for users who aren't signed in
+- Finish the "Add Category" button and page
+- Write unit tests for logout
+- Finish the filtering logic on the Expense Table
+- Dashboard: write the SQL to group and query the data
+- Dashboard: build the Flask JSON route and Plotly charts
+- Split the dashboard work into front-end and back-end tasks and assign them
+- Link the dashboard in the navigation panel
+
+---
+
+## Blockers and Issues
+- Add Expense build error (still open). Claudia got a build error when she opened Add Expense without being signed in. The route checks the session but doesn't send the user to the login page correctly. It's probably a path fix, and Miles said he'd update it.
+- Side panel cut off on Add Expense (fixed). Layce saw the navigation panel cut off in a small window. By the end of the meeting the page looked fine after Miles's changes.
+- Logout can't be marked done yet. It works and Layce tested it by hand, but there are no unit tests. Layce will write them before moving the card to Done.
+
+---
+
+## Risks and Mitigation
+- Unclear testing expectations. The team wasn't sure how much unit testing the professor expects. Claudia thought test cases are needed for the final report. The team decided to write unit tests for finished features, starting with logout.
+- Nobody has used Plotly yet. Layce hasn't tried it and will look into it more. Chart.js and Jinja templates are the backups if Plotly doesn't work out.
+- Where the session check lives. Layce put it in the app file instead of Claudia's login file and offered to move it if anyone objected. Miles said it works well because it can protect every route, so no change is needed.
+
+## Individual Contributions This Week
+
+- **Layce Smith:**
+  - Added the user session variable--put the session check in the app file rather than in Claudia's login file.
+  - Added links for every page to the side navigation panel. Only the dashboard is still missing.
+  - Made logout work: it ends the session and returns to the sign-in page. (Will write unit tests before marking it done.)
+  - Found that the side panel was cut off on the Add Expense page.
+  - Researched dashboard options and recommended Flask JSON with Plotly over Tableau.
+  
+- **Miles Devine:**
+  - Used the session variable in his queries, so users see only their own categories and their transactions belong to them. He pushed this to main.
+  - Owns the Add Expense page and adjusted its layout for the side panel.
+  - Building the "Add Category" button and page on a local branch.
+  - Will fix the login redirect path on the Add Expense route.
+  - Ran the meeting and is sending out the recording.
+  - Next week: write the SQL that groups and queries the data for the dashboard.
+  
+- **Claudia Vargas:**
+  - Found the build error that happens when you open Add Expense without being signed in.
+  - Login validation.
+  - Made the Add Expense form keep entered values when a submission has an error.
+  - Wrote unit tests for the expense table and for login.
+  - Added items to the Trello board and led most of the cleanup.
+  - Next week: finish the filtering logic on the expense table, then help with the dashboard.
+
+---
+
+## Reporting Period
+**Week:** 7 <br>
+**Meeting Held:** Yes <br>
+**Meeting Date:** November 9, 2026 <br>
+**Meeting Duration:** 30 minutes <br>
+**Meeting Format:** Zoom (not recorded) <br>
+
+---
+
+## Reporting Period
 **Week:** 6 <br>
 **Meeting Held:** Yes <br>
 **Meeting Date:** November 2, 2026 <br>
@@ -58,10 +164,6 @@ Work on remaining backlog items:
 - Add page navigation between pages
 - Unit Testing for math logic
 - Determine task priorities for the upcoming week and divvy up the work
-
----
-
-## Individual Contributions This Week
 
 ---
 
@@ -115,6 +217,8 @@ Work on remaining backlog items:
 - **Layce Smith:** built the User Profile page (`profile_route.py` Blueprint, `profile.html`, `profile.css`) on the `UserProfile` branch, and demoed it to the team
 - **Miles Devine:** built and demoed the Add Expense form page (`/add_expense`)
 - **Claudia Vargas:** documented meeting for notes
+
+---
 
 ## Reporting Period
 **Week:** 4 <br>
@@ -175,6 +279,7 @@ Work on remaining backlog items:
 **Miles Devine:** built the Flask-SQLAlchemy models and SQLite database, completed Account Registration Database, wrote seed_db.py to generate test data, continued work on Design Database
 **Layce Smith:** documented meeting for notes
 
+---
 
 ## Reporting Period
 **Week:** 3 <br>

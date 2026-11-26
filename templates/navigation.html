@@ -21,7 +21,7 @@ Last updated: 11/4/2026
     <!--Sidebar navigation, shown on every page that extends this template-->
     <nav class="sidebar">
         <ul class="sidebar-links">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
             <li><a href="{{ url_for('expenses') }}">Expenses</a></li>
             {% if session.get('username') %}
             <li><a href="{{ url_for('profile.profile', username=session['username']) }}">Profile</a></li>

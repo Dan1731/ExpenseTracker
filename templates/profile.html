@@ -1,6 +1,6 @@
 {% extends "navigation.html" %}
 {% block content %}
-  <a class="back" href="#"><span aria-hidden="true">&larr;</span> Back to dashboard</a>
+  <a class="back" href="{{ url_for('dashboard') }}"><span aria-hidden="true">&larr;</span> Back to dashboard</a>
   <p class="eyebrow">Your Penny account</p>
   <h1>Hi, {{ user.first_name or user.username }}!</h1> <!-- Greeting message (user's first name or username)-->
   <p class="lede">Make yourself at home. Keep your details up to date.</p>

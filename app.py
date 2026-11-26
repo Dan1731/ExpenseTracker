@@ -12,6 +12,7 @@ from sqlalchemy import or_, text
 from models import User, ExpenseTrans, ExpenseCat
 from login_route import login_pages
 from profile_route import profile_bp
+from dashboard_route import dashboard_bp
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -25,6 +26,7 @@ def create_app(test_config=None):
     app.register_blueprint(login_pages)
     app.register_blueprint(profile_bp)
     app.register_blueprint(add_expenses)
+    app.register_blueprint(dashboard_bp)
 
     app.config["SECRET_KEY"] = "dev"  # Change this to a random value in production
 

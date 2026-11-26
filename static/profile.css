@@ -7,6 +7,7 @@
     --line: #e3e8e2;
     --avatar: #e4eee5;
     --radius: 12px;
+    
   }
   * { box-sizing: border-box; }
   body {

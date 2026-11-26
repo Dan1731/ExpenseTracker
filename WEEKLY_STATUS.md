@@ -31,11 +31,65 @@ At the time of this report:
 ## Reporting Period
 **Week:** 9 <br>
 **Meeting Held:** No <br>
-**Date:** November 23, 2026
-Team opted not to meet during Thanksgiving Break but communicated updates via Email.
+**Date:** November 23, 2026 <br>
+Team opted not to meet during Thanksgiving Break but communicated updates via Email. <br>
 
+## Progress Since Last Week
+ 
+There was no meeting this week, but work on the dashboard and the expense table continued:
+ 
+- **Dashboard data:** Miles pushed the SQL that groups and queries spending data for the dashboard. It has one small error, which he plans to fix.
+- **Dashboard charts:** Miles built first-draft Plotly charts on a "Spending Dashboard" page: a bar chart and a pie chart of expenses by category. The page also has a placeholder filter bar for Start Date, End Date, Lower Amount and Upper Amount. He will keep refining the charts this week.
+- **Dashboard page:** Layce created and routed an empty dashboard page in the app. Plotly's fig.to_html(full_html=False) returns just the chart's <div>, which can be dropped into the template like any other variable.
+- **Expense Table:** Claudia finished the Expense Table. It shows summary cards (Total Expenses, Transactions, Largest Expense), search by title, a category filter and start/end date filters. Each row has an actions menu for Edit, Delete and Copy.
+- **Edit Expense:** Edit reuses the Add Expense page as an "Edit Expense" form with the fields filled in and a link back to the Expense Table.
+- **Unit tests:** Layce wrote unit tests for the profile page and for logging out.
+  
+---
+ 
+## Completed Tasks
+ 
+- First-draft Plotly visualizations: bar and pie charts of expenses by category
+- Empty dashboard page created and routed
+- Expense Table summary cards, search and filters
+- Expense Table row actions: Edit, Delete, Copy
+- Unit tests for logout and the profile page
 
+---
+ 
+## Planned Tasks for Next Week
+- Fix the small error in the dashboard SQL
+- Polish the Plotly charts and connect the filter bar (date range and amount range)
+- Put the Plotly charts into the dashboard page
+- Draft the final presentation--each member adds slides for their part of the demo
 
+---
+ 
+## Blockers and Issues
+- No meeting this week. The meeting slipped everyone's mind over the holiday, so updates came in by email instead. The team hasn't discussed the next steps together yet.
+- Dashboard SQL error (still open). Miles pushed the SQL with a small error and said he'd fix it.
+- Unit tests not on main yet. Layce's logout and profile tests are written but haven't been pushed. Logout stays out of Done until they are.
+
+---
+ 
+## Risks and Mitigation
+- Per-user data on the dashboard. A Plotly chart exported once as a static HTML file would always show the same data and wouldn't respond to filters. The dashboard has to show only the logged-in user's expenses. Mitigation: build the charts in the Flask route on each request using the session's user, either as embedded HTML or as JSON (embedded HTML seems the better option for this project).
+- Less time before the demo. The holiday cut into coordination near the end of the semester. Mitigation: the team kept sending updates by email, and Miles is starting the presentation draft early.
+- Chart readability. Very small categories, like Food and Phone, show as tiny slices on the pie chart with crowded labels. Mitigation: Miles is polishing the charts this week. Options include grouping small categories or leaning on the bar chart.
+
+## Individual Contributions This Week
+- **Layce Smith:**
+  - Wrote unit tests for the profile page and for logging out of a user session. Will push them to main.
+  - Created and routed an empty dashboard page to hold the Plotly charts.
+  - Documented email chain lieu of a zoom call 
+- **Miles Devine:**
+  - Pushed the dashboard SQL for grouping and querying spending data. Fixing a small error in it.
+  - Built first-draft Plotly charts (bar and pie charts of expenses by category) and a placeholder filter bar.
+  - Next week: polish the visualizations and draft the PowerPoint for the final demo.
+- **Claudia Vargas:**
+  - Finished the Expense Table, including summary cards, search, category and date filters.
+  - Added the row actions menu (Edit, Delete, Copy).
+  - Built Edit Expense by reusing the Add Expense page.
 
 ---
 
